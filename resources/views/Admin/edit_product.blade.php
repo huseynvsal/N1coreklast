@@ -85,14 +85,18 @@
             <div class="col-lg-6 product-info">
                 <button id="{{$product->id}}" class="btn btn-info edit_product"><i class="fa fa-pencil"></i></button>
                 <p class="caption"><span id="edit_p_name">{{$product->name}}</span></p>
-                <p>Tərkibi : <span id="edit_p_ingredient">{{$product->ingredient}}</span></p>
-                <p><span id="edit_p_value">{{$product->value}}</span> qr. Məhsulun qida dəyəri: </p>
-                <p>Zülal, q.-<span id="edit_p_protein">{{$product->protein}}</span></p>
-                <p>Yağ, q.-<span id="edit_p_fat">{{$product->fat}}</span></p>
-                <p>Enerji dəyəri – <span id="edit_p_energy">{{$product->energy}}</span> kC (264 kkal)</p>
-                <p>Net çəkisi, kq.- <span id="edit_p_weight">{{$product->weight}}</span> (+/-3%)</p>
-                <p>Saxlama müddəti: <span id="edit_p_life">{{$product->life}}</span> saat</p>
-                <p>Saxlama şəraiti: <span id="edit_p_condition">{{$product->condition}}</span></p>
+                @if($product->content == '')
+                    <p>Tərkibi : <span id="edit_p_ingredient">{{$product->ingredient}}</span></p>
+                    <p><span id="edit_p_value">{{$product->value}}</span> qr. Məhsulun qida dəyəri: </p>
+                    <p>Zülal, q.-<span id="edit_p_protein">{{$product->protein}}</span></p>
+                    <p>Yağ, q.-<span id="edit_p_fat">{{$product->fat}}</span></p>
+                    <p>Enerji dəyəri – <span id="edit_p_energy">{{$product->energy}}</span> kC (264 kkal)</p>
+                    <p>Net çəkisi, kq.- <span id="edit_p_weight">{{$product->weight}}</span> (+/-3%)</p>
+                    <p>Saxlama müddəti: <span id="edit_p_life">{{$product->life}}</span> saat</p>
+                    <p>Saxlama şəraiti: <span id="edit_p_condition">{{$product->condition}}</span></p>
+                @else
+                    <p><span id="edit_p_content">{!!$product->content!!}</span></p>
+                @endif
                 <p>Qiyməti: <span id="edit_p_price">{{$product->price}}</span> manat</p>
                 <p>Kateqoriyası: <span id="edit_p_category">{{$product->category}}</span></p>
             </div>

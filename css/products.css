@@ -345,6 +345,10 @@ body {
   letter-spacing: 2px;
   color: var(--white);
 }
+.product-pht {
+    width: 276px;
+    height: 276px;
+}
 .header3 .sliderall .image .image-text .Biz-biirdiyimiz-r {
   margin: 19.8px 48px 39px 0px;
   font-family: Gotham-Ultra;

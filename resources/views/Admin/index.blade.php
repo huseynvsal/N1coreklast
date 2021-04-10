@@ -14,6 +14,7 @@
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="{{asset('assets/tinymce/tinymce.min.js')}}" referrerpolicy="origin"></script>
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->

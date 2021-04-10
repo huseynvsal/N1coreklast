@@ -32,6 +32,35 @@ $('.col-6').on('click','.add_product',function(){
     });
 });
 
+$('.col-6').on('click','.add_p_content',function(){
+    var formData = new FormData($('#add_product')[0]);
+    var content = tinymce.get("myTextarea").getContent();
+    formData.append('mycontent', content);
+    $.ajax({
+        type: "POST",
+        url: "add_p_content",
+        data: formData,
+        cache:false,
+        processData:false,
+        contentType:false,
+        success:function (response){
+            if (response.message == 'success') {
+                toastr.success('Məhsul Əlavə olundu');
+                $('input[name=image1]').val('');
+                $('input[name=image2]').val('');
+                $('input[name=image3]').val('');
+                $('input[name=image4]').val('');
+                $('input[name=name]').val('');
+                $('input[name=price]').val('');
+                $('textarea[name=text]').text('');
+            }
+        },
+        error: function (request, error, response) {
+            toastr.error(request.responseJSON.errors[Object.keys(request.responseJSON.errors)[0]]);
+        }
+    });
+});
+
 $('table tbody').on('click','.delete_product',function(){
     var id = $(this).parents('tr').attr('id');
     $('#product_confirm').attr('name',id);
@@ -362,42 +391,104 @@ $('.product-info').on('click','.edit_product',function () {
     var condition = $('#edit_p_condition').text();
     var price = $('#edit_p_price').text();
     var category = $('#edit_p_category').text();
-    $(this).parents('.product-info').html('  <input value="'+name+'" type="text" name="name" placeholder="Məhsul adı" class="form-control"><br>\n' +
-        '                                    <input value="'+ingredient+'" type="text" name="ingredient" placeholder="Tərkibi" class="form-control"><br>\n' +
-        '                                    <input value="'+value+'" type="number" name="value" placeholder="Məhsulun qida dəyəri, q" class="form-control"><br>\n' +
-        '                                    <input value="'+protein+'" type="number" name="protein" placeholder="Zülal, q" class="form-control"><br>\n' +
-        '                                    <input value="'+fat+'" type="number" name="fat" placeholder="Yağ, q" class="form-control"><br>\n' +
-        '                                    <input value="'+energy+'" type="number" name="energy" placeholder="Enerji dəyəri, kC" class="form-control"><br>\n' +
-        '                                    <input value="'+weight+'" type="number" name="weight" placeholder="Net çəkisi, kq" class="form-control"><br>\n' +
-        '                                    <input value="'+life+'" type="number" name="life" placeholder="Saxlama müddəti, saat" class="form-control"><br>\n' +
-        '                                    <input value="'+condition+'" type="text" name="condition" placeholder="Saxlama şəraiti" class="form-control"><br>\n' +
-        '                                    <input value="'+price+'" type="number" name="price" placeholder="Qiyməti, manat" class="form-control"><br>\n' +
-        '                                    <select id="category_select" name="category" class="form-control">\n' +
-        '                                        <option disabled hidden selected value="">Kateqoriya</option>\n' +
-        '                                    </select>' +
-        '                                    <div class="btns"><button class="btn btn-light go_back">Geri qayıt</button><button class="btn btn-dark go_save">Yadda saxla</button></div>');
+    var content = $('.product-info pre').html();
+    // if (content == ''){
+        $(this).parents('.product-info').html('  <input value="'+name+'" type="text" name="name" placeholder="Məhsul adı" class="form-control"><br>\n' +
+            '                                    <input value="'+ingredient+'" type="text" name="ingredient" placeholder="Tərkibi" class="form-control"><br>\n' +
+            '                                    <input value="'+value+'" type="number" name="value" placeholder="Məhsulun qida dəyəri, q" class="form-control"><br>\n' +
+            '                                    <input value="'+protein+'" type="number" name="protein" placeholder="Zülal, q" class="form-control"><br>\n' +
+            '                                    <input value="'+fat+'" type="number" name="fat" placeholder="Yağ, q" class="form-control"><br>\n' +
+            '                                    <input value="'+energy+'" type="number" name="energy" placeholder="Enerji dəyəri, kC" class="form-control"><br>\n' +
+            '                                    <input value="'+weight+'" type="number" name="weight" placeholder="Net çəkisi, kq" class="form-control"><br>\n' +
+            '                                    <input value="'+life+'" type="number" name="life" placeholder="Saxlama müddəti, saat" class="form-control"><br>\n' +
+            '                                    <input value="'+condition+'" type="text" name="condition" placeholder="Saxlama şəraiti" class="form-control"><br>\n' +
+            '                                    <input value="'+price+'" type="number" name="price" placeholder="Qiyməti, manat" class="form-control"><br>\n' +
+            '                                    <select id="category_select" name="category" class="form-control">\n' +
+            '                                        <option disabled hidden selected value="">Kateqoriya</option>\n' +
+            '                                    </select>' +
+            '                                    <div class="btns"><button class="btn btn-light go_back">Geri qayıt</button><button class="btn btn-dark go_save">Yadda saxla</button></div>');
+    // }
+    // else{
+    //     $(this).parents('.product-info').html('  <input value="'+name+'" type="text" name="name" placeholder="Məhsul adı" class="form-control"><br>\n' +
+    //         '                                    <textarea name="text" id="myTextarea" class="tinymce"><pre>'+content+'</pre></textarea><br>\n' +
+    //         '                                    <input value="'+price+'" type="number" name="price" placeholder="Qiyməti, manat" class="form-control"><br>\n' +
+    //         '                                    <select id="category_select" name="category" class="form-control">\n' +
+    //         '                                        <option disabled hidden selected value="">Kateqoriya</option>\n' +
+    //         '                                    </select>' +
+    //         '                                    <div class="btns"><button class="btn btn-light go_back">Geri qayıt</button><button class="btn btn-dark go_save_c">Yadda saxla</button></div>');
+    // }
+    tinymce.init({
+        selector: '.tinymce',
+        height: 400,
+        width: 574,
+        verify_html: false,
+        theme: 'silver',
+        plugins: [
+            'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+            'searchreplace wordcount visualblocks visualchars code fullscreen table',
+            "insertdatetime media nonbreaking save table contextmenu directionality",
+            "emoticons template paste textcolor colorpicker textpattern"
+        ],
+        toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        toolbar2: 'print preview media | forecolor backcolor emoticons | codesample help | tableprops tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
+        image_advtab: true,
+        file_picker_callback: function(callback, value, meta) {
+            if (meta.filetype == 'image') {
+                $('#upload').trigger('click');
+                $('#upload').on('change', function() {
+                    var file = this.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        callback(e.target.result, {
+                            alt: ''
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        },
+        templates: [{
+            title: 'Test template 1',
+            content: 'Test 1'
+        },
+            {
+                title: 'Test template 2',
+                content: 'Test 2'
+            }
+        ],
+        content_css: []
+    });
     setTimeout(function() {
         $('#category_select option').each(function (){
-            console.log('as')
             if ($(this).val() == category){
                 $(this).attr('selected','selected');
             }
         });
     }, 500);
     $(document).on('click','.go_back',function () {
-        $(this).parents('.product-info').html('' +
-            '               <button id="'+id+'" class="btn btn-info edit_product"><i class="fa fa-pencil"></i></button>\n' +
-            '                <p class="caption"><span id="edit_p_name">'+name+'</span></p>\n' +
-            '                <p>Tərkibi : <span id="edit_p_ingredient">'+ingredient+'</span></p>\n' +
-            '                <p><span id="edit_p_value">'+value+'</span> qr. Məhsulun qida dəyəri: </p>\n' +
-            '                <p>Zülal, q.-<span id="edit_p_protein">'+protein+'</span></p>\n' +
-            '                <p>Yağ, q.-<span id="edit_p_fat">'+fat+'</span></p>\n' +
-            '                <p>Enerji dəyəri – <span id="edit_p_energy">'+energy+'</span> kC (264 kkal)</p>\n' +
-            '                <p>Net çəkisi, kq.- <span id="edit_p_weight">'+weight+'</span> (+/-3%)</p>\n' +
-            '                <p>Saxlama müddəti: <span id="edit_p_life">'+life+'</span> saat</p>\n' +
-            '                <p>Saxlama şəraiti: <span id="edit_p_condition">'+condition+'</span></p>\n' +
-            '                <p>Qiyməti: <span id="edit_p_price">'+price+'</span></p>\n' +
-            '                <p>Kateqoriyası: <span id="edit_p_category">'+category+'</span></p>');
+        if (content == ''){
+            $(this).parents('.product-info').html('' +
+                '               <button id="'+id+'" class="btn btn-info edit_product"><i class="fa fa-pencil"></i></button>\n' +
+                '                <p class="caption"><span id="edit_p_name">'+name+'</span></p>\n' +
+                '                <p>Tərkibi : <span id="edit_p_ingredient">'+ingredient+'</span></p>\n' +
+                '                <p><span id="edit_p_value">'+value+'</span> qr. Məhsulun qida dəyəri: </p>\n' +
+                '                <p>Zülal, q.-<span id="edit_p_protein">'+protein+'</span></p>\n' +
+                '                <p>Yağ, q.-<span id="edit_p_fat">'+fat+'</span></p>\n' +
+                '                <p>Enerji dəyəri – <span id="edit_p_energy">'+energy+'</span> kC (264 kkal)</p>\n' +
+                '                <p>Net çəkisi, kq.- <span id="edit_p_weight">'+weight+'</span> (+/-3%)</p>\n' +
+                '                <p>Saxlama müddəti: <span id="edit_p_life">'+life+'</span> saat</p>\n' +
+                '                <p>Saxlama şəraiti: <span id="edit_p_condition">'+condition+'</span></p>\n' +
+                '                <p>Qiyməti: <span id="edit_p_price">'+price+'</span></p>\n' +
+                '                <p>Kateqoriyası: <span id="edit_p_category">'+category+'</span></p>');
+        }
+        else{
+            $(this).parents('.product-info').html('' +
+                '               <button id="'+id+'" class="btn btn-info edit_product"><i class="fa fa-pencil"></i></button>\n' +
+                '                <p class="caption"><span id="edit_p_name">'+name+'</span></p>\n' +
+                '                <pre>'+content+'</pre>\n' +
+                '                <p>Qiyməti: <span id="edit_p_price">'+price+'</span></p>\n' +
+                '                <p>Kateqoriyası: <span id="edit_p_category">'+category+'</span></p>');
+        }
     });
 
     $(document).on('click', '.go_save', function (){
@@ -435,6 +526,34 @@ $('.product-info').on('click','.edit_product',function () {
                         '                <p>Net çəkisi, kq.- <span id="edit_p_weight">'+new_weight+'</span> (+/-3%)</p>\n' +
                         '                <p>Saxlama müddəti: <span id="edit_p_life">'+new_life+'</span> saat</p>\n' +
                         '                <p>Saxlama şəraiti: <span id="edit_p_condition">'+new_condition+'</span></p>\n' +
+                        '                <p>Qiyməti: <span id="edit_p_price">'+new_price+'</span> manat</p>\n' +
+                        '                <p>Kateqoriyası: <span id="edit_p_category">'+new_category+'</span></p>');
+                }
+            }
+        })
+    });
+
+    $(document).on('click', '.go_save_c', function (){
+        var div = $(this).parents('.product-info');
+        var new_name = $(this).parents('.product-info').find('input[name=name]').val().trim();
+        var new_content = tinymce.get("myTextarea").getContent();
+        var new_price = $(this).parents('.product-info').find('input[name=price]').val().trim();
+        var new_category = $(this).parents('.product-info').find('select[name=category] option:selected').val().trim();
+        $.ajax({
+            type: "POST",
+            url: "/edit_products_c",
+            data: {
+                'id':id, 'name':new_name, 'mycontent':new_content, 'price':new_price, 'category':new_category, "_token": csrftoken
+            },
+            success:function(response)
+            {
+                if(response.message == 'success')
+                {
+                    toastr.success('Məhsul məlumatları yeniləndi');
+                    div.html('' +
+                        '               <button id="'+id+'" class="btn btn-info edit_product"><i class="fa fa-pencil"></i></button>\n' +
+                        '                <p class="caption"><span id="edit_p_name">'+new_name+'</span></p>\n' +
+                        '                '+new_content+'\n' +
                         '                <p>Qiyməti: <span id="edit_p_price">'+new_price+'</span> manat</p>\n' +
                         '                <p>Kateqoriyası: <span id="edit_p_category">'+new_category+'</span></p>');
                 }

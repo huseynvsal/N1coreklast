@@ -114,10 +114,12 @@ Route::get('/edit_news/{id}', function ($id) {
         'news'=>$news
     ]);
 })->middleware('auth');
+
 Route::get('/add_product', function () {
     $categories = Category::all();
     return view('Admin.add_product', ['categories' => $categories]);
 })->middleware('auth');
+
 Route::get('/add_adv', function () {
     return view('Admin.add_adv');
 
@@ -139,6 +141,7 @@ Route::get('/category', function () {
     return view('Admin.category', ['categories' => $categories]);
 })->middleware('auth');
 Route::post('/add_product',[\App\Http\Controllers\Admin\AdminController::class, 'add_product'])->name( 'add_product')->middleware('auth');
+Route::post('/add_p_content',[\App\Http\Controllers\Admin\AdminController::class, 'add_p_content'])->name( 'add_p_content')->middleware('auth');
 Route::post('/add_message',[\App\Http\Controllers\Main\MainController::class, 'add_message'])->name( 'add_message');
 
 Route::post('/add_adv',[\App\Http\Controllers\Admin\AdminController::class, 'add_adv'])->name( 'add_adv')->middleware('auth');
@@ -163,6 +166,7 @@ Route::post('/edit_partner',[\App\Http\Controllers\Admin\AdminController::class,
 Route::post('/edit_category',[\App\Http\Controllers\Admin\AdminController::class, 'edit_category'])->name( 'edit_category')->middleware('auth');
 Route::post('/edit_images',[\App\Http\Controllers\Admin\AdminController::class, 'edit_images'])->name( 'edit_images')->middleware('auth');
 Route::post('/edit_products',[\App\Http\Controllers\Admin\AdminController::class, 'edit_products'])->name( 'edit_products')->middleware('auth');
+Route::post('/edit_products_c',[\App\Http\Controllers\Admin\AdminController::class, 'edit_products_c'])->name( 'edit_products_c')->middleware('auth');
 
 Route::post('/delete_partner',[\App\Http\Controllers\Admin\AdminController::class, 'delete_partner'])->name( 'delete_partner')->middleware('auth');
 Route::post('/delete_category',[\App\Http\Controllers\Admin\AdminController::class, 'delete_category'])->name( 'delete_category')->middleware('auth');

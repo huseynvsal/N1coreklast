@@ -1,5 +1,6 @@
 @extends('main.index2')
 @section('secondary')
+    <span id="bc_img" name="mainproduct"></span>
     @foreach($products as $product)
     <div class="mainproduct">
         <div class="container">
@@ -35,14 +36,18 @@
                 </div>
                 <div class="col-lg-6 product-info">
                     <p class="caption">{{$product->name}}</p>
-                    <p>Tərkibi : {{$product->ingredient}}</p>
-                    <p>{{$product->value}} qr. Məhsulun qida dəyəri: </p>
-                    <p>Zülal, q.-{{$product->protein}} </p>
-                    <p>Yağ, q.-{{$product->fat}}</p>
-                    <p>Enerji dəyəri – {{$product->energy}} kC (264 kkal)</p>
-                    <p>Net çəkisi, kq.- {{$product->weight}} (+/-3%)</p>
-                    <p>Saxlama müddəti: {{$product->life}} saat</p>
-                    <p>Saxlama şəraiti: {{$product->condition}}</p>
+                    @if($product->content == '')
+                        <p>Tərkibi : {{$product->ingredient}}</p>
+                        <p>{{$product->value}} qr. Məhsulun qida dəyəri: </p>
+                        <p>Zülal, q.-{{$product->protein}} </p>
+                        <p>Yağ, q.-{{$product->fat}}</p>
+                        <p>Enerji dəyəri – {{$product->energy}} kC (264 kkal)</p>
+                        <p>Net çəkisi, kq.- {{$product->weight}} (+/-3%)</p>
+                        <p>Saxlama müddəti: {{$product->life}} saat</p>
+                        <p>Saxlama şəraiti: {{$product->condition}}</p>
+                    @else
+                        <p>{!!$product->content!!}</p>
+                    @endif
                 </div>
             </div>
         </div>

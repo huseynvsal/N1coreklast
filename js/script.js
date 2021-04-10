@@ -189,16 +189,19 @@ function closeNav() {
 $(document).ready(function(){
     let span =$('#bc_img');
     if(span.attr('name') == 'virtualtur') {
-        $('.sliderall').css("background-image", "url(../img/middle1.jpg)");
+        $('.sliderall').css("background-image", "url(../img/600X4003-min.jpg)");
     }
     else if(span.attr('name') == 'contact') {
         $('.sliderall').css("background-image", "url(../img/middle4.jpg)");
     }
+    else if(span.attr('name') == 'mainproduct') {
+        $('.sliderall').css("background-image", "url(../img/middle3.jpg)");
+    }
     else if(span.attr('name') == 'about') {
-        $('.sliderall').css("background-image", "url(../img/middle.jpg)");
+        $('.sliderall').css("background-image", "url(../img/600X4002-min.jpg)");
     }
     else if(span.attr('name') == 'products') {
-        $('.sliderall').css("background-image", "url(../img/middle2.png)");
+        $('.sliderall').css("background-image", "url(../img/600X4003-min.jpg)");
         $('.sliderall').css("background-position", "bottom");
     }
     else if(span.attr('name') == 'mainpage') {

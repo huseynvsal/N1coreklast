@@ -21,7 +21,7 @@
                                 @foreach($products as $product)
                                     <div class="col-lg-4 col-sm-12 col-md-12 col-12 box" name="{{$product->category}}">
                                         <a href="/mainproduct/{{$product->id}}">
-                                            <div class="photo">
+                                            <div class="photo product-pht">
                                                 <img src="{{asset('images/'.$product->image1.'')}}" alt="">
                                             </div>
                                             <p class="l-dymdn-istehsal">{{$product->name}}</p>

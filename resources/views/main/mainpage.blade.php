@@ -7,27 +7,26 @@
             <div class="row">
 
                 <div class="col-lg-3 col-xl-3 col-md-12 col-sm-12 col-12">
-                    <img src="{{asset('img/health-care-copy.png')}}"  data-aos-duration="2000" data-aos="zoom-in"alt="">
-                    <p class="Peakar-mtxssisl">Peşakar <br>
-                        mütəxəssislər</p>
-                    <p class="Masir-texnologiyada">Müasir texnologiyadan istifadə və professional personalın işə cəlb edilməsi ilə biz yüksək</p>
-                </div>
-                <div class="col-lg-3 col-xl-3 col-md-12 col-sm-12 col-12">
                     <img src="{{asset('img/chef-copy-2.png')}}"  data-aos-duration="2000" data-aos="zoom-in"alt="">
+                    <p class="Peakar-mtxssisl">Peşakar<br>mütəxəssislər</p>
+                    <p class="Masir-texnologiyada">Müasir texnologiyadan istifadə və professional personalın işə cəlb edilməsi ilə biz yüksək</p>
+                </div>
+                <div class="col-lg-3 col-xl-3 col-md-12 col-sm-12 col-12">
+                    <img src="{{asset('img/health-care-copy.png')}}"  data-aos-duration="2000" data-aos="zoom-in"alt="">
+                    <p class="Peakar-mtxssisl">Sağlamlığınızı  <br>
+                        düşünərək</p>
+                    <p class="Masir-texnologiyada">Müasir texnologiyadan istifadə və professional personalın işə cəlb edilməsi ilə biz yüksək</p>
+                </div>
+                <div class="col-lg-3 col-xl-3 col-md-12 col-sm-12 col-12">
+                    <img src="{{asset('img/combined-shape.png')}}" data-aos-duration="2000"  data-aos="zoom-in" alt="">
                     <p class="Peakar-mtxssisl">Əl dəymədən <br>
                         istehsal</p>
                     <p class="Masir-texnologiyada">Müasir texnologiyadan istifadə və professional personalın işə cəlb edilməsi ilə biz yüksək</p>
                 </div>
                 <div class="col-lg-3 col-xl-3 col-md-12 col-sm-12 col-12">
-                    <img src="{{asset('img/health-care-copy.png')}}" data-aos-duration="2000"  data-aos="zoom-in" alt="">
-                    <p class="Peakar-mtxssisl">Əl dəymədən <br>
-                        istehsal</p>
-                    <p class="Masir-texnologiyada">Müasir texnologiyadan istifadə və professional personalın işə cəlb edilməsi ilə biz yüksək</p>
-                </div>
-                <div class="col-lg-3 col-xl-3 col-md-12 col-sm-12 col-12">
-                    <img src="{{asset('img/chef-copy-2.png')}}" data-aos-duration="2000" data-aos="zoom-in" alt="">
-                    <p class="Peakar-mtxssisl">Peşakar <br>
-                        mütəxəssislər</p>
+                    <img src="{{asset('img/combined-shape1.png')}}" data-aos-duration="2000" data-aos="zoom-in" alt="">
+                    <p class="Peakar-mtxssisl">Alman <br>
+                        keyfiyyəti</p>
                     <p class="Masir-texnologiyada">Müasir texnologiyadan istifadə və professional personalın işə cəlb edilməsi ilə biz yüksək</p>
                 </div>
 
